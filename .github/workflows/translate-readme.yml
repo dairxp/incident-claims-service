@@ -1,0 +1,22 @@
+name: Translate README
+
+on:
+  push:
+    paths:
+      - 'README.md'
+  workflow_dispatch:
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Translate README.md to English
+        uses: JunXiangLin/action-translate-readme@v1.2
+        with:
+          source_lang: es
+          target_lang: en
+          source_file: README.md
+          target_file: README.en.md
