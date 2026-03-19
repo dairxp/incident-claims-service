@@ -18,9 +18,8 @@ __pycache__/
 .dockerignore
 # (Si decides no subir docker-compose.yml, aunque en microservicios suele subirse)
 
-# Alembic
-alembic.ini
-# (Opcional, si quieres ignorar versiones viejas de migraciones)
+## Alembic
+# (No ignores alembic.ini, es necesario para migraciones)
 
 # Python testing
 .pytest_cache/
