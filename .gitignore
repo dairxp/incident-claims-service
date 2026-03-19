@@ -36,7 +36,7 @@ htmlcov/
 dist/
 build/
 .coverage
-.env.*
+.env
 .envrc
 ENV/
 .DS_Store

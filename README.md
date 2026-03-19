@@ -1,19 +1,16 @@
 
 
-# Incident Claims Service / Microservicio de Reclamos e Incidencias
+# Microservicio de Reclamos e Incidencias
 
-<details>
-<summary><strong>🌐 English (default)</strong> — <em>Click for Español</em></summary>
+API REST para la gestión de reclamos e incidencias del sector administrativo universitario. Construida con **FastAPI + PostgreSQL + SQLAlchemy**.
 
-## Incident Claims Service
-
-REST API for managing claims and incidents in the university administrative sector. Built with **FastAPI + PostgreSQL + SQLAlchemy**.
+[English version](README.en.md)
 
 ---
 
-## Tech Stack
+## Stack tecnológico
 
-| Technology | Version |
+| Tecnología | Versión |
 |---|---|
 | Python | 3.11+ |
 | FastAPI | 0.115.5 |
@@ -24,40 +21,40 @@ REST API for managing claims and incidents in the university administrative sect
 
 ---
 
-## Run the project with Docker
+## Levantar el proyecto con Docker
 
-### 1. Clone and enter the folder
+### 1. Clonar y entrar a la carpeta
 
 ```bash
 cd incident-claims-service
 ```
 
-### 2. Create the `.env` file
+### 2. Crear el archivo `.env`
 
 ```bash
 cp .env.example .env
 ```
 
-### 3. Start the services
+### 3. Levantar los servicios
 
 ```bash
 docker-compose up --build
 ```
 
-The API will be available at: **http://localhost:8000**  
-Swagger docs: **http://localhost:8000/docs**
+La API estará disponible en: **http://localhost:8000**
+Documentación Swagger: **http://localhost:8000/docs**
 
 ---
 
-## Run migrations (first time)
+## Ejecutar migraciones (primera vez)
 
-Inside the `api` container:
+Dentro del contenedor `api`:
 
 ```bash
 docker-compose exec api alembic upgrade head
 ```
 
-Or from your local environment (with DB accessible):
+O desde tu entorno local (con la BD accesible):
 
 ```bash
 alembic upgrade head
@@ -65,65 +62,65 @@ alembic upgrade head
 
 ---
 
-## Run tests
+## Ejecutar tests
 
 ```bash
-# Install dependencies
+# Instalar dependencias
 pip install -r requirements.txt
 
-# Run tests
+# Ejecutar tests
 pytest tests/ -v
 ```
 
 ---
 
-## Available Endpoints
+## Endpoints disponibles
 
 ### Health Check
-| Method | Path | Description |
+| Método | Ruta | Descripción |
 |---|---|---|
-| GET | `/health` | Service status |
+| GET | `/health` | Estado del servicio |
 
-### Incident Types
-| Method | Path | Description |
+### Tipos de Incidencia
+| Método | Ruta | Descripción |
 |---|---|---|
-| POST | `/api/v1/tipos-incidencia` | Create type |
-| GET | `/api/v1/tipos-incidencia` | List with filters and pagination |
-| GET | `/api/v1/tipos-incidencia/{id}` | Get details |
-| PUT | `/api/v1/tipos-incidencia/{id}` | Update |
-| PATCH | `/api/v1/tipos-incidencia/{id}/estado` | Activate/Deactivate |
+| POST | `/api/v1/tipos-incidencia` | Crear tipo |
+| GET | `/api/v1/tipos-incidencia` | Listar con filtros y paginación |
+| GET | `/api/v1/tipos-incidencia/{id}` | Ver detalle |
+| PUT | `/api/v1/tipos-incidencia/{id}` | Actualizar |
+| PATCH | `/api/v1/tipos-incidencia/{id}/estado` | Activar/Desactivar |
 | DELETE | `/api/v1/tipos-incidencia/{id}` | Soft delete |
 
-### Claims
-| Method | Path | Description |
+### Reclamos
+| Método | Ruta | Descripción |
 |---|---|---|
-| POST | `/api/v1/reclamos` | Create claim |
-| GET | `/api/v1/reclamos` | List with filters and pagination |
-| GET | `/api/v1/reclamos/{id}` | Details + history |
-| PATCH | `/api/v1/reclamos/{id}/estado` | Change status |
-| PUT | `/api/v1/reclamos/{id}` | Edit claim |
+| POST | `/api/v1/reclamos` | Crear reclamo |
+| GET | `/api/v1/reclamos` | Listar con filtros y paginación |
+| GET | `/api/v1/reclamos/{id}` | Detalle + historial |
+| PATCH | `/api/v1/reclamos/{id}/estado` | Cambiar estado |
+| PUT | `/api/v1/reclamos/{id}` | Editar reclamo |
 | DELETE | `/api/v1/reclamos/{id}` | Soft delete |
 
-### Statistics (for reporting microservice)
-| Method | Path | Description |
+### Estadísticas (para microservicio de reportes)
+| Método | Ruta | Descripción |
 |---|---|---|
-| GET | `/api/v1/estadisticas/resumen` | Totals by status/priority/type |
-| GET | `/api/v1/estadisticas/reclamos` | Full list without pagination |
+| GET | `/api/v1/estadisticas/resumen` | Totales por estado/prioridad/tipo |
+| GET | `/api/v1/estadisticas/reclamos` | Lista completa sin paginación |
 
 ---
 
-## Claim status transitions
+## Transiciones de estado de reclamos
 
 ```
 abierto → en_proceso
 en_proceso → resuelto
-en_proceso → rechazado  (requires motivo_rechazo)
+en_proceso → rechazado  (requiere motivo_rechazo)
 resuelto → cerrado
 ```
 
 ---
 
-## Project structure
+## Estructura del proyecto
 
 ```
 incident-claims-service/
@@ -175,29 +172,18 @@ incident-claims-service/
 
 ---
 
-## Additional notes
+## Notas adicionales
 
-- Remember to create and configure the `.env` file before starting the services.
-- Ignore files and folders like `__pycache__/`, `.env`, `venv/`, and temporary files in version control.
-- Alembic migrations are in `alembic/versions/`.
-- Unit tests are in the `tests/` folder.
-
----
-
-## License
-
-Created by DairXP
-
-</details>
-
-<details open>
-<summary><strong>🇪🇸 Español</strong> — <em>Haz clic para English</em></summary>
-
-# Microservicio de Reclamos e Incidencias
-
-API REST para la gestión de reclamos e incidencias del sector administrativo universitario. Construida con **FastAPI + PostgreSQL + SQLAlchemy**.
+- Recuerda crear y configurar el archivo `.env` antes de levantar los servicios.
+- Los archivos y carpetas como `__pycache__/`, `.env`, `venv/`, y archivos temporales deben ser ignorados en el control de versiones.
+- Las migraciones de Alembic se encuentran en `alembic/versions/`.
+- Los tests unitarios están en la carpeta `tests/`.
 
 ---
+
+## Licencia
+
+Elaborado por DairXP
 
 ## Stack tecnológico
 
