@@ -21,7 +21,7 @@ class TipoIncidenciaUpdate(TipoIncidenciaBase):
 class TipoIncidenciaResponse(TipoIncidenciaBase):
     id: UUID
     codigo: str
-    created_at: datetime
-    updated_at: Optional[datetime]
+    fecha_creacion: datetime
+    fecha_actualizacion: Optional[datetime]
     
     model_config = ConfigDict(from_attributes=True)

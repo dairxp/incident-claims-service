@@ -35,11 +35,11 @@ class ReclamoRepository:
         return db_obj
 
     def get_by_id(self, id: UUID) -> Optional[Reclamo]:
-        stmt = select(Reclamo).where(Reclamo.id == id, Reclamo.deleted_at.is_(None))
+        stmt = select(Reclamo).where(Reclamo.id == id, Reclamo.fecha_eliminacion.is_(None))
         return self.session.execute(stmt).scalar_one_or_none()
     
     def get_all(self, skip: int = 0, limit: int = 10, estado: Optional[EstadoReclamoEnum] = None, tipo_incidencia_id: Optional[UUID] = None, prioridad: Optional[PrioridadEnum] = None, fecha_desde: Optional[datetime] = None, fecha_hasta: Optional[datetime] = None) -> Tuple[List[Reclamo], int]:
-        stmt = select(Reclamo).where(Reclamo.deleted_at.is_(None))
+        stmt = select(Reclamo).where(Reclamo.fecha_eliminacion.is_(None))
         
         if estado:
             stmt = stmt.where(Reclamo.estado == estado)
@@ -70,7 +70,7 @@ class ReclamoRepository:
         return db_obj
 
     def soft_delete(self, db_obj: Reclamo) -> Reclamo:
-        db_obj.deleted_at = datetime.now(timezone.utc)
+        db_obj.fecha_eliminacion = datetime.now(timezone.utc)
         self.session.flush()
         return db_obj
     
@@ -95,20 +95,20 @@ class ReclamoRepository:
         return db_obj
 
     def get_estadisticas_resumen(self):
-        total = self.session.scalar(select(func.count()).select_from(Reclamo).where(Reclamo.deleted_at.is_(None))) or 0
+        total = self.session.scalar(select(func.count()).select_from(Reclamo).where(Reclamo.fecha_eliminacion.is_(None))) or 0
         
         estados = self.session.execute(
-            select(Reclamo.estado, func.count(Reclamo.id)).where(Reclamo.deleted_at.is_(None)).group_by(Reclamo.estado)
+            select(Reclamo.estado, func.count(Reclamo.id)).where(Reclamo.fecha_eliminacion.is_(None)).group_by(Reclamo.estado)
         ).all()
         
         prioridades = self.session.execute(
-            select(Reclamo.prioridad, func.count(Reclamo.id)).where(Reclamo.deleted_at.is_(None)).group_by(Reclamo.prioridad)
+            select(Reclamo.prioridad, func.count(Reclamo.id)).where(Reclamo.fecha_eliminacion.is_(None)).group_by(Reclamo.prioridad)
         ).all()
         
         tipos = self.session.execute(
             select(TipoIncidencia.nombre, func.count(Reclamo.id))
             .join(Reclamo.tipo_incidencia)
-            .where(Reclamo.deleted_at.is_(None))
+            .where(Reclamo.fecha_eliminacion.is_(None))
             .group_by(TipoIncidencia.nombre)
         ).all()
         

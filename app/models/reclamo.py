@@ -36,6 +36,6 @@ class Reclamo(Base):
     fecha_creacion = Column(DateTime(timezone=True), server_default=func.now())
     fecha_actualizacion = Column(DateTime(timezone=True), onupdate=func.now())
     fecha_cierre = Column(DateTime(timezone=True), nullable=True)
-    deleted_at = Column(DateTime(timezone=True), nullable=True)
+    fecha_eliminacion = Column(DateTime(timezone=True), nullable=True)
     
     historial_estados = relationship("HistorialEstado", back_populates="reclamo", cascade="all, delete-orphan")

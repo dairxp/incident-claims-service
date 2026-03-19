@@ -32,11 +32,11 @@ class TipoIncidenciaRepository:
         return db_obj
 
     def get_by_id(self, id: UUID) -> Optional[TipoIncidencia]:
-        stmt = select(TipoIncidencia).where(TipoIncidencia.id == id, TipoIncidencia.deleted_at.is_(None))
+        stmt = select(TipoIncidencia).where(TipoIncidencia.id == id, TipoIncidencia.fecha_eliminacion.is_(None))
         return self.session.execute(stmt).scalar_one_or_none()
     
     def get_all(self, skip: int = 0, limit: int = 10, estado: Optional[EstadoTipoEnum] = None, prioridad: Optional[PrioridadEnum] = None, requiere_servicio_externo: Optional[bool] = None) -> Tuple[List[TipoIncidencia], int]:
-        stmt = select(TipoIncidencia).where(TipoIncidencia.deleted_at.is_(None))
+        stmt = select(TipoIncidencia).where(TipoIncidencia.fecha_eliminacion.is_(None))
         
         if estado:
             stmt = stmt.where(TipoIncidencia.estado == estado)
@@ -48,7 +48,7 @@ class TipoIncidenciaRepository:
         count_stmt = select(func.count()).select_from(stmt.subquery())
         total = self.session.execute(count_stmt).scalar() or 0
         
-        stmt = stmt.offset(skip).limit(limit).order_by(TipoIncidencia.created_at.desc())
+        stmt = stmt.offset(skip).limit(limit).order_by(TipoIncidencia.fecha_creacion.desc())
         items = self.session.execute(stmt).scalars().all()
         
         return list(items), total
@@ -60,7 +60,7 @@ class TipoIncidenciaRepository:
         return db_obj
 
     def soft_delete(self, db_obj: TipoIncidencia) -> TipoIncidencia:
-        db_obj.deleted_at = datetime.now(timezone.utc)
+        db_obj.fecha_eliminacion = datetime.now(timezone.utc)
         self.session.flush()
         return db_obj
 
