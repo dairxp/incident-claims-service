@@ -1,0 +1,2 @@
+from app.repositories.tipo_incidencia_repository import TipoIncidenciaRepository
+from app.repositories.reclamo_repository import ReclamoRepository
