@@ -2,7 +2,8 @@
 
 REST API for managing claims and incidents in the university administrative area. Built with FastAPI + PostgreSQL + SQLAlchemy.
 
-Language: [Espanol](README.md) | **English**
+[![lang en](https://img.shields.io/badge/lang-en-e67e22?style=for-the-badge)](README.en.md)
+[![lang es](https://img.shields.io/badge/lang-es-8a8a8a?style=for-the-badge)](README.md)
 
 ---
 

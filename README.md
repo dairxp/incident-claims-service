@@ -2,7 +2,8 @@
 
 API REST para la gestion de reclamos e incidencias del sector administrativo universitario. Construida con FastAPI + PostgreSQL + SQLAlchemy.
 
-Idioma: **Espanol (por defecto)** | [English](README.en.md)
+[![lang en](https://img.shields.io/badge/lang-en-8a8a8a?style=for-the-badge)](README.en.md)
+[![lang es](https://img.shields.io/badge/lang-es-c9a227?style=for-the-badge)](README.md)
 
 ---
 
