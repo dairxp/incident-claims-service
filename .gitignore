@@ -1,0 +1,48 @@
+# Environments
+venv/
+env/
+.env
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker
+.dockerignore
+# (Si decides no subir docker-compose.yml, aunque en microservicios suele subirse)
+
+# Alembic
+alembic.ini
+# (Opcional, si quieres ignorar versiones viejas de migraciones)
+
+# Python testing
+.pytest_cache/
+coverage.xml
+htmlcov/
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.tmp
+*.bak
+*.egg-info/
+dist/
+build/
+.coverage
+.env.*
+.envrc
+ENV/
+.DS_Store
+alembic/versions/__pycache__/
+app/**/__pycache__/
+app/**/.pytest_cache/
+tests/__pycache__/
+*.lock
