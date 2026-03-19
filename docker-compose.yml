@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL:-postgresql://reclamos_user:reclamos_password@db:5432/reclamos_db}
+      - API_KEY=${API_KEY:-clave-secreta-para-microservicios}
+      - APP_ENV=${APP_ENV:-development}
+    volumes:
+      - .:/code
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-reclamos_user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-reclamos_password}
+      - POSTGRES_DB=${POSTGRES_DB:-reclamos_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-reclamos_user} -d ${POSTGRES_DB:-reclamos_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
