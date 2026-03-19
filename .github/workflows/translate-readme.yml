@@ -17,9 +17,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Translate README.md to English
-        uses: JunXiangLin/action-translate-readme@v1.2
+        uses: ephraimduncan/translate-readme@main
         with:
-          source_lang: es
-          target_lang: en
-          source_file: README.md
-          target_file: README.en.md
+          LANG: en
+
+      - name: Commit translated README
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'docs: update README.en.md from README.md'
+          file_pattern: README.en.md
