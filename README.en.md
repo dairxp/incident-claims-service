@@ -2,8 +2,7 @@
 
 REST API for the management of complaints and incidents in the university administrative sector. Built with FastAPI + PostgreSQL + SQLAlchemy.
 
-[![lang en](https://img.shields.io/badge/lang-en-e67e22?style=for-the-badge)](README.en.md)
-[![lang es](https://img.shields.io/badge/lang-es-8a8a8a?style=for-the-badge)](README.md)
+[![lang en](https://img.shields.io/badge/lang-en-8a8a8a?style=for-the-badge)](README.en.md)[![lang es](https://img.shields.io/badge/lang-es-c9a227?style=for-the-badge)](README.md)
 
 * * *
 
@@ -73,7 +72,7 @@ pytest tests/ -v
 
 * * *
 
-## Available endpoints
+## Endpoints disponibles
 
 ### Health Check
 
@@ -105,10 +104,10 @@ pytest tests/ -v
 
 ### Statistics (for reporting microservice)
 
-| Method | Ruta                            | Description                       |
-| ------ | ------------------------------- | --------------------------------- |
-| GET    | `/api/v1/estadisticas/resumen`  | Totales por estado/prioridad/tipo |
-| GET    | `/api/v1/estadisticas/reclamos` | Full list without pagination      |
+| Method | Ruta                            | Description                    |
+| ------ | ------------------------------- | ------------------------------ |
+| GET    | `/api/v1/estadisticas/resumen`  | Totals by status/priority/type |
+| GET    | `/api/v1/estadisticas/reclamos` | Full list without pagination   |
 
 * * *
 
